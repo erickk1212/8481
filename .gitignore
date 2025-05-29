@@ -1,0 +1,23 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IntelliSense database
+*.VC.db
+*.VC.opendb
+
+# Backup & Logs
+*.log
+*.bak
+*.cache
+
+# Others
+*.pdb
+*.ipch
+*.ilk
