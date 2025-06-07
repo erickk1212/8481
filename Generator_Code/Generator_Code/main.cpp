@@ -4,8 +4,72 @@
 #include<algorithm>
 #include<fstream>
 using namespace std;
+#define os cout
+using ull = unsigned long long;
+
+// TODO
+void c1()
+{
+
+}
+
+void c2()
+{
+	ull a = 0, b = 1;
+	for (int i = 0; i < 10000; i++)
+	{
+		cout << b;
+		ull c = (a + b) % 9099099909999099999;
+		a = b;
+		b = c;
+		cout << ", ";
+	}
+	cout << "0.";
+}
+
+// TODO
+void c3()
+{
+
+}
+
+// TODO
+void c4()
+{
+
+}
+
+// TODO
+void c5()
+{
+
+}
+
+// TODO
+void c6()
+{
+
+}
+
+// TODO
+void c7()
+{
+
+}
+
+// TODO
+void c8()
+{
+
+}
+
+// TODO
+void c9()
+{
+
+}
+
 using mtrx = vector<vector<int>>;
-ofstream os("case10.out");
 mtrx mtrxmlt(const mtrx& A, const mtrx& B)
 {
     int n = A.size();
@@ -67,7 +131,7 @@ void c10()
 		c = x;
 	}
 	vector<int>a = c;
-	os << "(A_i)^n = B_i (mod 2)\n\n";
+	os << "\n(A_i)^n = B_i (mod 2)\n\n";
 	for (int i = 1; i < 71; i++)
 	{
 		mtrx b = ct(a, i);
@@ -112,8 +176,44 @@ void c10()
 	}
 }
 
-// Test #10
 int main()
 {
-	c10();
+	int n;
+	cin >> n;
+	switch (n)
+	{
+	case 0:
+		cout << "ONTAK 2010";
+		break;
+	case 1:
+		c1();
+		break;
+	case 2:
+		c2();
+		break;
+	case 3:
+		c3();
+		break;
+	case 4:
+		c4();
+		break;
+	case 5:
+		c5();
+		break;
+	case 6:
+		c6();
+		break;
+	case 7:
+		c7();
+		break;
+	case 8:
+		c8();
+		break;
+	case 9:
+		c9();
+		break;
+	case 10:
+		c10();
+	}
+	return 0;
 }
