@@ -4,7 +4,6 @@
 #include<algorithm>
 #include<fstream>
 using namespace std;
-#define os cout
 using ull = unsigned long long;
 
 // TODO
@@ -27,10 +26,22 @@ void c2()
 	cout << "0.";
 }
 
-// TODO
 void c3()
 {
-
+	for (int i = 0; i < 1024; i++)
+	{
+		for (int j = 0; j < 1024 - i; j++)
+		{
+			if (i == 506 && j == 449) cout << ".####..##..##.######..##...##..##.....####...####..###..####.";
+			if (i == 507 && j == 449) cout << "##..##.###.##...##...####..##.##.....##..##.##..##..##.##..##";
+			if (i == 508 && j == 449) cout << "##..##.##.###...##..##..##.####.........##..##..##..##.##..##";
+			if (i == 509 && j == 449) cout << "##..##.##..##...##..######.##.##......##....##..##..##.##..##";
+			if (i == 510 && j == 449) cout << ".####..##..##...##..##..##.##..##....######..####...##..####.";
+			if (i > 505 && i < 511 && j > 448 && j < 510)continue;
+			cout << (i & j ? '.' : '#');
+		}
+		cout << '\n';
+	}
 }
 
 // TODO
@@ -105,7 +116,7 @@ mtrx ct(const vector<int>& flat, int n)
 }
 void c10()
 {
-	os << "a_i = a_{i-1} . a_{i-2}\n\na_1 = 0\n\na_2 = 0 1\n\n";
+	cout << "a_i = a_{i-1} . a_{i-2}\n\na_1 = 0\n\na_2 = 0 1\n\n";
 	vector<int> p = { 0 };
 	vector<int> c = { 0, 1 };
 	for (int i = 3; i < 20; i++)
@@ -114,24 +125,24 @@ void c10()
 		x.insert(x.end(), p.begin(), p.end());
 		if (i < 16)
 		{
-			os << "a_" << i << " = ";
+			cout << "a_" << i << " = ";
 			for (int j = 0; j < x.size(); j++)
 			{
-				os << x[j];
-				if (j != x.size() - 1) os << " ";
+				cout << x[j];
+				if (j != x.size() - 1) cout << " ";
 				if ((j + 1) % 40 == 0 && j != x.size() - 1)
 					if (i > 9)
-						os << "\n       ";
+						cout << "\n       ";
 					else
-						os << "\n      ";
+						cout << "\n      ";
 			}
-			os << "\n\n";
+			cout << "\n\n";
 		}
 		p = c;
 		c = x;
 	}
 	vector<int>a = c;
-	os << "\n(A_i)^n = B_i (mod 2)\n\n";
+	cout << "\n(A_i)^n = B_i (mod 2)\n\n";
 	for (int i = 1; i < 71; i++)
 	{
 		mtrx b = ct(a, i);
@@ -139,40 +150,40 @@ void c10()
 		{
 			if (x == i / 2)
 			{
-				os << "A_" << i << " = ";
+				cout << "A_" << i << " = ";
 			}
 			else if (i > 9)
 			{
-				os << "       ";
+				cout << "       ";
 			}
 			else
 			{
-				os << "      ";
+				cout << "      ";
 			}
 			for (int y = 0; y < i; y++)
 			{
-				os << a[x * i + y] << " ";
+				cout << a[x * i + y] << " ";
 			}
 			if (x == i / 2)
 			{
-				os << "  B_" << i << " = ";
+				cout << "  B_" << i << " = ";
 			}
 			else if (i > 9)
 			{
-				os << "         ";
+				cout << "         ";
 			}
 			else
 			{
-				os << "        ";
+				cout << "        ";
 			}
 			for (int y = 0; y < i; y++)
 			{
-				os << b[x][y];
-				if (y < i - 1)os << " ";
+				cout << b[x][y];
+				if (y < i - 1)cout << " ";
 			}
-			os << '\n';
+			cout << '\n';
 		}
-		if (i < 70)os << '\n';
+		if (i < 70)cout << '\n';
 	}
 }
 
