@@ -84,10 +84,61 @@ void c4()
 	}
 }
 
-// TODO
 void c5()
 {
-
+	string mon[12] = { "stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","wrzesnia","pazdziernika","listopada","grudnia" };
+	string one[20] = { "","pierwszy","drugi","trzeci","czwarty","piaty","szosty","siodmy","osmy","dziewiaty","dziesiaty","jedenasty","dwunasty","trzynasty","czternasty","pietnasty","szesnasty","siedemnasty","osiemnasty","dziewietnasty" };
+	string ten[10] = { "","","dwudziesty","trzydziesty","czterdziesty","piecdziesiaty","szescdziesiaty","siedemdziesiaty","osiemdziesiaty","dziewiecdziesiaty" };
+	string huns[4] = { "","setny","dwusetny","trzysetny" };
+	string hunb[4] = { "","sto ","dwiescie ","trzysta " };
+	string year[21] = { "dwutysiecznego","pierwszego","drugiego","trzeciego","czwartego","piatego","szostego","siodmego","osmego","dziewiatego",
+		"dziesiatego","jedenastego","dwunastego","trzynastego","czternastego","pietnastego","szesnastego","siedemnastego","osiemnastego","dziewietnastego","dwudziestego" };
+	for (int y = 0; y < 21; y++)
+	{
+		int cnt = 0;
+		for (int m = 0; m < 12; m++)
+		{
+			int k;
+			if (y % 4 == 0 && m == 1) k = 29;
+			else if (m == 1) k = 28;
+			else if (m == 3 || m == 5 || m == 8 || m == 10) k = 30;
+			else k = 31;
+			for (int d = 1; d <= k; d++)
+			{
+				++cnt;
+				if (y == 7 && m == 3 && d == 1) { cout << "Pierwszego kwietnia jest prima aprilis.\n"; continue; }
+				if (y == 13 && m == 3 && d == 1) { cout << "Pierwszego czerwca jest dzien dziecka.\n"; continue; }
+				if (d < 20)
+				{
+					one[d][0] -= 32;
+					cout << one[d];
+					one[d][0] += 32;
+				}
+				else
+				{
+					ten[d / 10][0] -= 32;
+					cout << ten[d / 10];
+					ten[d / 10][0] += 32;
+					if (d % 10) cout << " " << one[d % 10];
+				}
+				cout << ' ' << mon[m] << " to ";
+				if (cnt % 100)
+				{
+					cout << hunb[cnt / 100];
+					int t = cnt % 100;
+					if (t < 20) cout << one[t];
+					else
+					{
+						cout << ten[t / 10];
+						if (t % 10) cout << " " << one[t % 10];
+					}
+				}
+				else cout << huns[cnt / 100];
+				cout << " dzien roku " << (y ? "dwa tysiace " : "") << year[y] << ".\n";
+			}
+		}
+	}
+	cout << "Koniec.";
 }
 
 // TODO
