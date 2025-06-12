@@ -6,6 +6,7 @@
 using namespace std;
 using ull = unsigned long long;
 #define num 9099099909999099999
+ofstream out("c6.out");
 
 void c1()
 {
@@ -141,10 +142,44 @@ void c5()
 	cout << "Koniec.";
 }
 
-// TODO
+const long long fact[21] = {
+	1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800,
+	39916800, 479001600, 6227020800, 87178291200, 1307674368000,
+	20922789888000, 355687428096000, 6402373705728000, 121645100408832000, 2432902008176640000
+};
+void getT(ull n, vector<char>& chars, string& result)
+{
+	if (chars.empty()) return;
+	int k = chars.size();
+	ull f = fact[k - 1];
+	ull i = n / f;
+	result += chars[i];
+	chars.erase(chars.begin() + i);
+	getT(n % f, chars, result);
+}
 void c6()
 {
-
+	for (ull i = 1; i <= 20000; ++i)
+	{
+		ull n = i * i * i * i;
+		ull t = n - 1;
+		int k = 1;
+		if (i == 10000)
+		{
+			out << "T[" << n << "]=\"" << num << "\"\n";
+			continue;
+		}
+		while (t >= fact[k])
+		{
+			t -= fact[k];
+			k++;
+		}
+		vector<char> s;
+		for (int j = 0; j < k; j++) s.push_back('a' + j);
+		string res;
+		getT(t, s, res);
+		out << "T[" << n << "]=\"" << res << "\"\n";
+	}
 }
 
 // TODO
