@@ -7,8 +7,8 @@ int main()
 {
     std::string name1, name2;
     std::cin >> name1 >> name2;
-    std::ifstream file1("C:\\Users\\84lsj\\OneDrive\\바탕 화면\\8481\\" + name1);
-    std::ifstream file2("C:\\Users\\84lsj\\OneDrive\\바탕 화면\\8481\\" + name2);
+    std::ifstream file1("C:\\Users\\84lsj\\Desktop\\8481\\" + name1);
+    std::ifstream file2("C:\\Users\\84lsj\\Desktop\\8481\\" + name2);
 
     if (!file1 || !file2) {
         std::cerr << "파일을 열 수 없습니다.\n";
