@@ -6,7 +6,6 @@
 using namespace std;
 using ull = unsigned long long;
 #define num 9099099909999099999
-ofstream out("c6.out");
 
 void c1()
 {
@@ -108,7 +107,7 @@ void c5()
 			{
 				++cnt;
 				if (y == 7 && m == 3 && d == 1) { cout << "Pierwszego kwietnia jest prima aprilis.\n"; continue; }
-				if (y == 13 && m == 3 && d == 1) { cout << "Pierwszego czerwca jest dzien dziecka.\n"; continue; }
+				if (y == 13 && m == 5 && d == 1) { cout << "Pierwszego czerwca jest dzien dziecka.\n"; continue; }
 				if (d < 20)
 				{
 					one[d][0] -= 32;
@@ -166,7 +165,7 @@ void c6()
 		int k = 1;
 		if (i == 10000)
 		{
-			out << "T[" << n << "]=\"" << num << "\"\n";
+			cout << "T[" << n << "]=\"" << num << "\"\n";
 			continue;
 		}
 		while (t >= fact[k])
@@ -178,14 +177,213 @@ void c6()
 		for (int j = 0; j < k; j++) s.push_back('a' + j);
 		string res;
 		getT(t, s, res);
-		out << "T[" << n << "]=\"" << res << "\"\n";
+		cout << "T[" << n << "]=\"" << res << "\"\n";
 	}
 }
 
-// TODO
+void p0(int n)
+{
+	string s[5] = { ".####.","##..##","##..##","##..##",".####." };
+	cout << s[n];
+}
+void p1(int n)
+{
+	string s[5] = { "###",".##",".##",".##",".##" };
+	cout << s[n];
+}
+void p2(int n)
+{
+	string s[5] = { ".####.","##..##","...##.",".##...","######" };
+	cout << s[n];
+}
+void p9(int n)
+{
+	string s[5] = { ".####.","##..##",".#####","....##",".####." };
+	cout << s[n];
+}
+void pcm(int n)
+{
+	string s[5] = { ".......",".......",".......",".##....","..#...." };
+	cout << s[n];
+}
+void pprd(int n)
+{
+	string s[5] = { "...","...","...",".##",".##" };
+	cout << s[n];
+}
+void fill_line(int n)
+{
+	for (int i = 0; i < 1000 - n; ++i)
+		cout << ".";
+	cout << "\n";
+}
 void c7()
 {
-
+	int n = 0;
+	string s = "1";
+	vector<pair<string, int>> v;
+	for (int i = 0; i <= 170; ++i)
+	{
+		int sum = 0;
+		for (char c : s)
+		{
+			if (c == '1')
+			{
+				sum += 4;
+			}
+			if (c == '2')
+			{
+				sum += 7;
+			}
+			if (c == '0')
+			{
+				sum += 7;
+			}
+		}
+		sum += 6;
+		v.push_back({ s,sum });
+		string s2;
+		int carry = 0;
+		for (char c : s)
+		{
+			s2.push_back((((c - '0') * 2 + carry) % 3) + '0');
+			carry = ((c - '0') * 2 + carry) / 3;
+		}
+		if (carry > 0) s2.push_back(carry + '0');
+		s = s2;
+	}
+	v.push_back({ "0.",9 });
+	int j = 0;
+	for (int i = 0; i < 171; ++i)
+	{
+		if (n + v[i].second > 1000)
+		{
+			for (int k = 0; k < 5; ++k)
+			{
+				for (int l = j; l < i; ++l)
+				{
+					int size = v[l].first.size();
+					for (int m = 0; m < size; ++m)
+					{
+						char c = v[l].first[m];
+						if (c == '0')
+						{
+							p0(k);
+						}
+						if (c == '1')
+						{
+							p1(k);
+						}
+						if (c == '2')
+						{
+							p2(k);
+						}
+						if (m != size - 1)
+							cout << ".";
+					}
+					pcm(k);
+				}
+				fill_line(n);
+			}
+			n = 0;
+			fill_line(n);
+			j = i;
+		}
+		n += v[i].second;
+	}
+	n += 10;
+	for (int k = 0; k < 5; ++k)
+	{
+		int size = v[170].first.size();
+		for (int l = 0; l < size; ++l)
+		{
+			char c = v[170].first[l];
+			if (c == '0')
+			{
+				p0(k);
+			}
+			if (c == '1')
+			{
+				p1(k);
+			}
+			if (c == '2')
+			{
+				p2(k);
+			}
+			if (c == '.')
+			{
+				pprd(k);
+			}
+			if (l != size - 1)
+				cout << ".";
+		}
+		pcm(k);
+		for (char c : v[171].first)
+		{
+			if (c == '0')
+			{
+				p0(k);
+			}
+			if (c == '1')
+			{
+				p1(k);
+			}
+			if (c == '2')
+			{
+				p2(k);
+			}
+			if (c == '.')
+			{
+				pprd(k);
+			}
+		}
+		cout << ".";
+		fill_line(n);
+	}
+	fill_line(0);
+	fill_line(0);
+	n = 0;
+	string S[4] = {
+		"01020102001020021020001020010200120000120001200102010200120120012001200102012001020102012001020102010102010201200120012012001220100200012002010201020102010200",
+		"120012012001200120012001200120012001200120012012001201002000102001201200020020010020102001200001020102000120002010200102020000102001202002102001200202010201",
+		"0201020010020201020201020200120010001200201200102012001200120102012002100002010200010200012022020012020102020102020102010909909990999909999902010200120012",
+		"0012010201020102012001201201020120102012002001020012001200120012000120012001200210200120000120012001201200120102001001001001010100101000020102010200102001020001"
+	};
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int k = 0; k < 5; ++k)
+		{
+			for (int j = 0; j < S[i].size(); ++j)
+			{
+				char c = S[i][j];
+				if (c == '0')
+				{
+					p0(k);
+					if (k == 0) n += 6;
+				}
+				if (c == '1')
+				{
+					p1(k);
+					if (k == 0) n += 3;
+				}
+				if (c == '2')
+				{
+					p2(k);
+					if (k == 0) n += 6;
+				}
+				if (c == '9')
+				{
+					p9(k);
+					if (k == 0) n += 6;
+				}
+				cout << ".";
+				if (k == 0) n += 1;
+			}
+			fill_line(n);
+		}
+		n = 0;
+		if (i != 3) fill_line(n);
+	}
 }
 
 // TODO
@@ -212,7 +410,7 @@ mtrx mtrxmlt(const mtrx& A, const mtrx& B)
 					res[i][j] ^= B[k][j];
 	return res;
 }
-mtrx mtrxpow(mtrx base, long long pw = 9099099909999099999LL)
+mtrx mtrxpow(mtrx base, long long pw = num)
 {
 	int n = base.size();
 	mtrx result(n, vector<int>(n, 0));
